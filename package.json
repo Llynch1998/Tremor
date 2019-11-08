@@ -1,28 +1,56 @@
 {
   "name": "tremor",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.9.0"
+  },
   "description": "A real time chat app made with react in electron",
-  "main": "index.js",
+  "main": "./server/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "nodemon": "nodemon --watch ./server ./server/app.js",
+    "start": "node ./server/app.js",
+    "pretest": "eslint ./server --fix",
+    "test": "echo \"Tests complete\"",
+    "buildLoginBundle": "babel ./client/login ./client/helper --presets react --out-file ./hosted/loginBundle.js",
+    "buildAppBundle": "babel ./client/app ./client/helper --presets react --out-file ./hosted/bundle.js",
+    "build": "npm run buildLoginBundle && npm run buildAppBundle",
+    "watchLoginBundle": "babel --watch ./client/login ./client/helper --presets react --out-file ./hosted/loginBundle.js",
+    "watchAppBundle": "babel --watch ./client/app ./client/helper --presets react --out-file ./hosted/bundle.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Llynch1998/Tremor.git"
   },
-  "author": "Wyatt Lynch & Matt Paseltiner",
+  "author": "Wyatt Lynch & Matthew Paseltiner",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/Llynch1998/Tremor/issues"
   },
   "homepage": "https://github.com/Llynch1998/Tremor#readme",
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "compression": "^1.6.1",
+    "connect-redis": "^3.0.2",
+    "cookie-parser": "^1.3.3",
+    "csurf": "^1.8.3",
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.13.0",
+    "helmet": "^1.3.0",
+    "mongoose": "^4.4.6",
+    "serve-favicon": "^2.3.0",
+    "underscore": "^1.8.3",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0"
   },
   "devDependencies": {
-    "eslint": "^6.4.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-plugin-import": "^2.18.2"
+    "babel-cli": "^6.18.0",
+    "babel-preset-env": "^1.1.8",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^3.0.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.10.1",
+    "nodemon": "^1.11.0"
   }
 }
